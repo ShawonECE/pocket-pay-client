@@ -10,15 +10,16 @@ const AuthProvider = ({children}) => {
     const axiosPublic = useAxiosPublic();
     
     useEffect(() => {
-        
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        setUser(currentUser);
     }, []);
 
     const createUser = (data) => {
-        console.log(data);
+        return axiosPublic.post('/register', data);
     };
 
     const signInUser = (data) => {
-        return axiosPublic.post('/register', data);
+        return axiosPublic.post('/login', data);
     };
 
     const logOutUser = () => {

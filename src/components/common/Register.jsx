@@ -6,7 +6,7 @@ import { AuthContext } from "./AuthProvider";
 import swal from 'sweetalert';
 
 const Register = () => {
-    const { signInUser } = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const {
         register,
@@ -18,7 +18,7 @@ const Register = () => {
         }
     });
     const onSubmit = (data) => {
-        signInUser(data)
+        createUser(data)
         .then(res => {
             if (res.data.insertedId) {
                 swal("Registered successfully!", {
