@@ -1,13 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     return (
         <div className="flex flex-col justify-center items-center min-h-screen">
+            <Helmet>
+                <title>PocketPay | Log In</title>
+            </Helmet>
             <h2 className="text-orange-500 text-4xl font-bold mt-10 mb-2">Welcome to PocketPay</h2>
             <h3 className="text-white mb-5">The only digital payment solution you need</h3>
             <div className="card shrink-0 w-full max-w-lg bg-transparent border border-orange-500">
                 <form className="card-body">
+                    {
+                        location.state?.from === '/register' &&
+                        <h2 className="text-center text-lg font-semibold text-green-400">You are registered. Now please log in</h2>
+                    }
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text text-white">Email/Phone No.</span>

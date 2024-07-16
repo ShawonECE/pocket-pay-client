@@ -10,7 +10,10 @@ import ErrorPage from './components/common/ErrorPage';
 import Login from './components/common/Login';
 import Register from './components/common/Register.jsx';
 import { HelmetProvider } from 'react-helmet-async';
+import AuthProvider from './components/common/AuthProvider.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,8 +34,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HelmetProvider>
-        <RouterProvider router={router} />
-    </HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <HelmetProvider>
+          <RouterProvider router={router} />
+        </HelmetProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 )
