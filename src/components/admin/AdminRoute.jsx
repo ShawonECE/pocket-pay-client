@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../../components/AuthProvider';
-import useRole from '../../hooks/useRole';
+import { AuthContext } from './../common/AuthProvider';
 
 const AdminRoute = ({children}) => {
     const {user, loading} = useContext(AuthContext);
-    const { data: role, isPending: rolePending } = useRole();
-    if (loading || rolePending) {
+    if (loading) {
         return (
             <div className="flex flex-col gap-4 w-full">
                 <div className="skeleton h-32 w-full"></div>
@@ -17,7 +15,7 @@ const AdminRoute = ({children}) => {
             </div>
         );
     } else {
-        if (user && role === 'admin') {
+        if (user && user.role === 'admin') {
             return children;
         } else {
             return <Navigate to='/' replace></Navigate>;

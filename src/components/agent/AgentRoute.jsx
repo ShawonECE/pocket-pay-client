@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../../components/AuthProvider';
-import useRole from '../../hooks/useRole';
+import { AuthContext } from './../common/AuthProvider';
 
-const GuideRoute = ({children}) => {
-    const {user, loading} = useContext(AuthContext);
-    const { data: role, isPending: rolePending } = useRole();
-    if (loading || rolePending) {
+const AgentRoute = ({children}) => {
+    const { user, loading } = useContext(AuthContext);
+    if (loading) {
         return (
             <div className="flex flex-col gap-4 w-full">
                 <div className="skeleton h-32 w-full"></div>
@@ -17,7 +15,7 @@ const GuideRoute = ({children}) => {
             </div>
         );
     } else {
-        if (user && role === 'guide') {
+        if (user && user.role === 'agent') {
             return children;
         } else {
             return <Navigate to='/' replace></Navigate>;
@@ -25,8 +23,8 @@ const GuideRoute = ({children}) => {
     }
 };
 
-GuideRoute.propTypes = {
+AgentRoute.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-export default GuideRoute;
+export default AgentRoute;

@@ -30,8 +30,7 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 min-h-full bg-[#0C0C0C] text-white gap-2">
                     {/* Sidebar content here */}
-                    <li><NavLink to="/" style={handleActiveNavLink2}>Home</NavLink></li>
-                    <li><NavLink to="/dashboard/profile" style={handleActiveNavLink2}>Profile</NavLink></li>
+                    <li><NavLink to="/dashboard/Overview" style={handleActiveNavLink2}>Overview</NavLink></li>
                     {
                         user.role === 'user' &&
                         <>
@@ -49,7 +48,7 @@ const Dashboard = () => {
                         </>
                     }
                     {
-                        user.role === 'guide' &&
+                        user.role === 'agent' &&
                         <>
                             <li><NavLink to="/dashboard/assigned-tours" style={handleActiveNavLink2}>Assigned Tours</NavLink></li>
                         </>
