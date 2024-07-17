@@ -18,6 +18,13 @@ const Register = () => {
         }
     });
     const onSubmit = (data) => {
+        data.status = "pending";
+        data.role = data.role.toLowerCase();
+        if (data.role === "agent") {
+            data.balance = 10000;
+        } else {
+            data.balance = 0;
+        }
         createUser(data)
         .then(res => {
             if (res.data.insertedId) {

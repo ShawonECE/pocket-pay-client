@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const axiosPublic = useAxiosPublic();
-    const { signInUser, setUser, user } = useContext(AuthContext);
+    const { signInUser, setUser } = useContext(AuthContext);
     const {
         register,
         handleSubmit,
@@ -39,6 +39,7 @@ const Login = () => {
                 swal("Logged in successfully!", {
                     icon: "success",
                 });
+                navigate('/dashboard');
 
             } else {
                 swal("Login Failed!", {
@@ -85,7 +86,7 @@ const Login = () => {
                         <p className="text-red-500 mt-2">{errors.pin?.message}</p>
                     </div>
                     <div className="form-control mt-6">
-                        <button type='submit' className="btn bg-transparent hover:bg-orange-500 text-white border-orange-500 hover:border-0" disabled={ user }>Login</button>
+                        <button type='submit' className="btn bg-transparent hover:bg-orange-500 text-white border-orange-500 hover:border-0">Login</button>
                     </div>
                 </form>
                 <p onClick={() => navigate('/register')} className="text-orange-500 text-center -mt-2 mb-4 underline cursor-pointer">Not registered yet? Register now</p>

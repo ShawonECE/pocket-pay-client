@@ -11,7 +11,10 @@ const AuthProvider = ({children}) => {
     
     useEffect(() => {
         const currentUser = JSON.parse(localStorage.getItem('user'));
-        setUser(currentUser);
+        if (currentUser) {
+            setUser(currentUser);
+            setLoading(false);
+        }
     }, []);
 
     const createUser = (data) => {
@@ -22,10 +25,12 @@ const AuthProvider = ({children}) => {
         return axiosPublic.post('/login', data);
     };
 
-    const logOutUser = () => {
-
+    const signOutUser = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        setUser(null);
     };
-    const AuthInfo = {user, setUser, loading, setLoading, createUser, signInUser, logOutUser};
+    const AuthInfo = { user, setUser, loading, setLoading, createUser, signInUser, signOutUser };
     return (
         <AuthContext.Provider value={AuthInfo}>
             {children}
